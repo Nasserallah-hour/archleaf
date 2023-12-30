@@ -1,0 +1,194 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-1">
+        <createTable tableName="client">
+            <column autoIncrement="true" name="id" startWith="2" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="client_pkey"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-2">
+        <createTable tableName="devise">
+            <column autoIncrement="true" name="id" startWith="5" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="devise_pkey"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="total_amount" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="client_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-3">
+        <createTable tableName="facture">
+            <column autoIncrement="true" name="id" startWith="4" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="facture_pkey"/>
+            </column>
+            <column name="amount" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="client_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-4">
+        <createTable tableName="product">
+            <column autoIncrement="true" name="id" startWith="4" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="product_pkey"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="product_category" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-5">
+        <createTable tableName="product_category">
+            <column autoIncrement="true" name="id" startWith="3" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="product_category_pkey"/>
+            </column>
+            <column name="category_name" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-6">
+        <createTable tableName="reglement">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="reglement_pkey"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="facture_id" type="BIGINT"/>
+            <column name="date_reglement" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="payment_method" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="FLOAT4"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-7">
+        <createTable tableName="devise_product_to_be_purchased">
+            <column name="devise_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_to_be_purchased_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-8">
+        <createTable tableName="client_devises">
+            <column name="client_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="devises_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-9">
+        <createTable tableName="client_factures">
+            <column name="client_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="factures_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-10">
+        <addUniqueConstraint columnNames="name" constraintName="uk_jmivyxk9rmgysrmsqw15lqr5b" tableName="product"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-11">
+        <addUniqueConstraint columnNames="category_name" constraintName="uks05p89lq8xgab8cdgj20f0eo5" tableName="product_category"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-12">
+        <addUniqueConstraint columnNames="facture_id" constraintName="uk_fbb2lytigjue9m57jjpb8ox5j" tableName="reglement"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-13">
+        <addUniqueConstraint columnNames="product_to_be_purchased_id" constraintName="uk_5xqxjth26sxfo9ko2d1mx044y" tableName="devise_product_to_be_purchased"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-14">
+        <addUniqueConstraint columnNames="devises_id" constraintName="uk_6ego0lxcvw3cggfrn9duyyeqq" tableName="client_devises"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-15">
+        <addUniqueConstraint columnNames="factures_id" constraintName="uk_qy3dnjclbp1bcawe7hepyvk9y" tableName="client_factures"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-16">
+        <createTable tableName="facture_product_purchased">
+            <column name="facture_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="facture_product_purchased_pkey"/>
+            </column>
+            <column name="product_purchased_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="facture_product_purchased_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-17">
+        <createTable tableName="product_facture">
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="product_facture_pkey"/>
+            </column>
+            <column name="facture_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="product_facture_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-18">
+        <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="client_devises" constraintName="fk1bwm45m247fpct88eiklmc432" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="client" validate="true"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-19">
+        <addForeignKeyConstraint baseColumnNames="facture_id" baseTableName="reglement" constraintName="fk1qd1o6fw7qlutso5q9u18k68i" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="facture" validate="true"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-20">
+        <addForeignKeyConstraint baseColumnNames="facture_id" baseTableName="product_facture" constraintName="fk64lf7oj13ssv0ltoei3827uq7" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="facture" validate="true"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-21">
+        <addForeignKeyConstraint baseColumnNames="product_purchased_id" baseTableName="facture_product_purchased" constraintName="fk6yt6k7a02k1wuioog3erw11xv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="product" validate="true"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-22">
+        <addForeignKeyConstraint baseColumnNames="product_to_be_purchased_id" baseTableName="devise_product_to_be_purchased" constraintName="fk7ufmf3c3u5u55n6aaa7fbd8s1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="product" validate="true"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-23">
+        <addForeignKeyConstraint baseColumnNames="product_category" baseTableName="product" constraintName="fkbvdd7owwhvkamc6unq83xdcrj" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="product_category" validate="true"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-24">
+        <addForeignKeyConstraint baseColumnNames="facture_id" baseTableName="facture_product_purchased" constraintName="fkbxl9q2bfkk3pr7ujwtiphf9vw" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="facture" validate="true"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-25">
+        <addForeignKeyConstraint baseColumnNames="factures_id" baseTableName="client_factures" constraintName="fkc5ixxgeijtotb3xaottoiynu0" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="facture" validate="true"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-26">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="product_facture" constraintName="fkh94u2iv9er3cyvd12u156p5vh" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="product" validate="true"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-27">
+        <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="facture" constraintName="fkkimq62662qs9wrpfvsw8mcnvf" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="client" validate="true"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-28">
+        <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="client_factures" constraintName="fklenirn5ywi31g7ih9yk8yddyw" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="client" validate="true"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-29">
+        <addForeignKeyConstraint baseColumnNames="devise_id" baseTableName="devise_product_to_be_purchased" constraintName="fklwtgq4btrxntukoq24y87j1rm" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="devise" validate="true"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-30">
+        <addForeignKeyConstraint baseColumnNames="devises_id" baseTableName="client_devises" constraintName="fkqsp621jklrrb9agn5gtfcpn25" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="devise" validate="true"/>
+    </changeSet>
+    <changeSet author="nasserallah-ip (generated)" id="1703926081435-31">
+        <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="devise" constraintName="fkt39gabifdvdnvgteoo4iadcm5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="client" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/arch-db
+    username: arch
+    password: +@L6y7
+  jpa:
+    hibernate:
+      ddl-auto: update
+  liquibase:
+    enabled: false
+    drop-first: false
+    change-log: classpath:/db/changelog/db.changelog-4.xml
+    default-schema: public
