@@ -8,6 +8,7 @@ import tn.atch.acrh.DeviseService.service.DeviseService;
 import tn.atch.acrh.ProductService.service.ProductService;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
@@ -29,12 +30,15 @@ public class DeviseServiceImpl implements DeviseService {
 
     @Override
     public Devise createDevise(Devise devise) {
-        devise.getProductToBePurchased().forEach(
-                product -> {
-                    devise.setTotalAmount(devise.getTotalAmount() + productService.getProductById(product.getId()).getPrice());
-                });
+        if(Objects.nonNull(devise.getProductToBePurchased())){
+            devise.getProductToBePurchased().forEach(
+                    product -> {
+                        devise.setTotalAmount(devise.getTotalAmount() + productService.getProductById(product.getId()).getPrice());
+                    });
+        }
         return deviseRepository.save(devise);
     }
+
 
     @Override
     public Devise updateDevise(Long id, Devise devise) {

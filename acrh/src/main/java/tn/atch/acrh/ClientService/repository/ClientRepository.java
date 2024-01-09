@@ -6,4 +6,5 @@ import tn.atch.acrh.ClientService.model.Client;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
+    Client findUserByEmail(String email);
 }

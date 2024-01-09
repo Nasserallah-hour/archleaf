@@ -8,6 +8,7 @@ import tn.atch.acrh.ClientService.model.Client;
 import tn.atch.acrh.ProductService.model.Product;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -22,11 +23,13 @@ public class Devise {
     private Long id;
     @Column(nullable = false)
     private double totalAmount;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isExpired=false;
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
     @ManyToMany
-    private List<Product> productToBePurchased;
+    private List<Product> productToBePurchased=new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp

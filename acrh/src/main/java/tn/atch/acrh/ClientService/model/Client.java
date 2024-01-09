@@ -23,7 +23,10 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String lastname;
+    @Column(unique = true)
     private String email;
+    private String password;
     @OneToMany
     private List<Facture> factures;
     @OneToMany
