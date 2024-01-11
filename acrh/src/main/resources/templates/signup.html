@@ -6,44 +6,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Inscription</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
 <div layout:fragment="content">
     <div class="container">
-        <h2 class="center-align">Sign Up</h2>
+        <h2 class="center-align">Inscription</h2>
 
         <form th:action="@{/signup}" method="post" class="col s12">
             <div class="row">
                 <div class="input-field col s6">
                     <input id="name" name="name" type="text" class="validate" required>
-                    <label for="name">First Name</label>
+                    <label for="name">Prénom</label>
                 </div>
                 <div class="input-field col s6">
                     <input id="lastname" name="lastname" type="text" class="validate" required>
-                    <label for="lastname">Last Name</label>
+                    <label for="lastname">Nom de famille</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <input id="email" name="email" type="email" class="validate" required>
-                    <label for="email">Email</label>
+                    <label for="email">E-mail</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <input id="password" name="password" type="password" class="validate" required>
-                    <label for="password">Password</label>
+                    <label for="password">Mot de passe</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <input id="confirmPassword" name="confirmPassword" type="password" class="validate" required>
-                    <label for="confirmPassword">Confirm Password</label>
+                    <label for="confirmPassword">Confirmer le mot de passe</label>
                 </div>
             </div>
-            <button type="submit" class="btn">Sign Up</button>
+            <button type="submit" class="btn">S'inscrire</button>
         </form>
     </div>
 </div>

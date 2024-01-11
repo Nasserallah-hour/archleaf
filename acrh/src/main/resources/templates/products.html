@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}" >
+      layout:decorate="~{layout-connecte}" >
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product List</title>
+  <title>Liste des Produits</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <style>
-    /* Add custom styles for the cart icon and badge */
+    /* Ajoutez des styles personnalisés pour l'icône du panier et le badge */
     .cart-icon {
       position: relative;
       display: inline-block;
@@ -37,15 +37,15 @@
       </a>
     </div>
 
-    <h2 class="center-align">Product List</h2>
+    <h2 class="center-align">Liste des Produits</h2>
     <table class="striped">
       <thead>
       <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Category</th>
-        <th>Quantity</th>
-        <th>Action</th> <!-- Added column for the Add to Cart button -->
+        <th>Nom</th>
+        <th>Prix</th>
+        <th>Catégorie</th>
+        <th>Quantité</th>
+        <th>Action</th>
       </tr>
       </thead>
       <tbody>
@@ -54,13 +54,6 @@
         <td th:text="${product.price}"></td>
         <td th:text="${product.category.categoryName}"></td>
         <td th:text="${product.quantity}"></td>
-        <td>
-          <!-- Added form to add product to cart -->
-          <form th:action="@{/addToDevise}" method="post">
-            <input type="hidden" name="productId" th:value="${product.id}" />
-            <button type="submit" class="btn">Add to Cart</button>
-          </form>
-        </td>
       </tr>
       </tbody>
     </table>

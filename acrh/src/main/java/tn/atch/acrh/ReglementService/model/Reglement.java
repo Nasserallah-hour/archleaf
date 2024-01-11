@@ -25,6 +25,9 @@ public class Reglement {
     private double price;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateReglement;
+    
+    @Column(columnDefinition = "boolean default false")
+    private boolean reglementEffectue=false;
 
     @Column(nullable = false)
     private PaymentMethod paymentMethod;

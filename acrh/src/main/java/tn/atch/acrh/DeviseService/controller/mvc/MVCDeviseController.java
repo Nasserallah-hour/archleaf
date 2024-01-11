@@ -17,6 +17,8 @@ import tn.atch.acrh.ProductService.service.ProductService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 public class MVCDeviseController {
@@ -32,16 +34,15 @@ public class MVCDeviseController {
     public String viewCart(Model model, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Client client = clientService.getClientByEmail(userDetails.getUsername());
-        List<Devise> deviseList = deviseService.getDevisesByClientId(client.getId());
-        Devise devise=null;
         List<Product> products=new ArrayList<>();
-        if (!deviseList.isEmpty()) {
-            devise = deviseList.stream().filter(devise1 -> devise1.getIsExpired().equals(false)).findFirst().orElseThrow();
-            products = devise.getProductToBePurchased();
-        }
+        Optional<Devise> foundDevise = deviseService.getLatestDevise(client.getId());
+        Devise devise;
+        devise = foundDevise.orElseGet(() -> Devise.builder().client(client).build());
+        products = devise.getProductToBePurchased();
+
         model.addAttribute("devise", devise);
         model.addAttribute("products", products);
-        model.addAttribute("total",devise!=null ?devise.getTotalAmount():0);
+        model.addAttribute("total", devise.getTotalAmount());
 
         return "cart";
     }
@@ -51,12 +52,11 @@ public class MVCDeviseController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Client client = clientService.getClientByEmail(userDetails.getUsername());
         Product product = productService.getProductById(productId);
-        List<Devise> deviseList = deviseService.getDevisesByClientId(client.getId());
+        Optional<Devise> foundDevise = deviseService.getLatestDevise(client.getId());
         Devise devise;
-        if (!deviseList.isEmpty()) {
-            devise = deviseList.stream().filter(devise1 -> devise1.getIsExpired().equals(false)).findFirst().orElseThrow();
-        } else {
-            devise = deviseService.createDevise(Devise.builder().client(client).build());
+        devise = foundDevise.orElseGet(() -> deviseService.createDevise(Devise.builder().client(client).isExpired(false).productToBePurchased(new ArrayList<>()).build()));
+        if(Objects.isNull(devise.getProductToBePurchased())){
+            devise.setProductToBePurchased(new ArrayList<>());
         }
         devise.getProductToBePurchased().add(product);
         product.setQuantity(product.getQuantity()-1);
@@ -74,9 +74,7 @@ public class MVCDeviseController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Client client = clientService.getClientByEmail(userDetails.getUsername());
         Product product = productService.getProductById(productId);
-        List<Devise> deviseList = deviseService.getDevisesByClientId(client.getId());
-        Devise devise;
-        devise = deviseList.stream().filter(devise1 -> devise1.getIsExpired().equals(false)).findFirst().orElseThrow();
+        Devise devise = deviseService.getLatestDevise(client.getId()).orElseThrow();
         devise.getProductToBePurchased().remove(product);
         product.setQuantity(product.getQuantity()+1);
         devise.setTotalAmount(0);

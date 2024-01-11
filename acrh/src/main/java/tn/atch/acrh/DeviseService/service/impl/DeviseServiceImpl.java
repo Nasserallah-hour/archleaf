@@ -59,4 +59,9 @@ public class DeviseServiceImpl implements DeviseService {
     public List<Devise> getDevisesByClientId(Long clientId) {
         return deviseRepository.findByClientId(clientId);
     }
+
+    @Override
+    public Optional<Devise> getLatestDevise(Long clientId) {
+        return deviseRepository.findFirstByClientIdOrderById(clientId);
+    }
 }

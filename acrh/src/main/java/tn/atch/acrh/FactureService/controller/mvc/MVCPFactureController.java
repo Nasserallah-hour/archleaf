@@ -17,6 +17,7 @@ import tn.atch.acrh.ProductService.service.ProductService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class MVCPFactureController {
@@ -33,12 +34,18 @@ public class MVCPFactureController {
     public String checkoutFacture (Model model, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Client client = clientService.getClientByEmail(userDetails.getUsername());
-        List<Devise> deviseList = deviseService.getDevisesByClientId(client.getId());
-        Devise devise=null;
-        if (!deviseList.isEmpty()) {
-            devise = deviseList.stream().filter(devise1 -> devise1.getIsExpired().equals(false)).findFirst().orElseThrow();
+        Optional<Devise> foundDevise = deviseService.getLatestDevise(client.getId());
+        Devise devise;
+        if (foundDevise.isEmpty() || foundDevise.get().getIsExpired()) {
+            devise= Devise.builder().client(client).build();
         }
-        Facture facture = factureService.createFacture(Facture.builder().client(client).productPurchased(devise!=null?devise.getProductToBePurchased():new ArrayList<>() ).build());
+        else{
+            devise=foundDevise.get();
+        }
+        List<Product> purchasedList = devise.getProductToBePurchased().stream().toList();
+        devise.setIsExpired(true);
+        deviseService.updateDevise(devise.getId(),devise);
+        Facture facture = factureService.createFacture(Facture.builder().client(client).productPurchased(purchasedList).build());
         model.addAttribute("products", facture.getProductPurchased());
         return "checkout";
     }
