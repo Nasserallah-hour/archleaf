@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un Produit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<div class="container">
+    <h2 class="center-align">Créer un Produit</h2>
+
+    <form action="/products/create-product" method="post" th:object="${product}" class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="name" type="text" th:field="*{name}" required>
+                <label for="name">Nom du Produit</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="price" type="number" th:field="*{price}" required>
+                <label for="price">Prix</label>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Category dropdown selector -->
+            <div class="input-field col s6">
+                <select id="category" th:field="*{category}" required>
+                    <option value="${category.id}" disabled selected>Choisissez une catégorie</option>
+                    <!-- Loop through categories and populate options -->
+                    <th:block th:each="category : ${categories}">
+                        <option th:value="${category.id}" th:text="${category.categoryName}"></option>
+                    </th:block>
+                </select>
+                <label>Catégorie</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="quantity" type="number" th:field="*{quantity}" required>
+                <label for="quantity">Quantité</label>
+            </div>
+        </div>
+
+        <button class="btn waves-effect waves-light" type="submit" name="action">Créer un Produit
+            <i class="material-icons right">send</i>
+        </button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<!-- Initialize Materialize Form Fields -->
+<script>
+    $(document).ready(function(){
+        $('select').formSelect();
+        M.updateTextFields();
+    });
+</script>
+</body>
+</html>

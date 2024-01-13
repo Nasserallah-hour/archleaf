@@ -1,0 +1,38 @@
+<!-- src/main/resources/templates/factures.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Factures</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<div class="container">
+
+    <h2 class="center-align">Liste des Factures</h2>
+    <table class="striped">
+        <thead>
+        <tr>
+            <th>Montant</th>
+            <th>Client</th>
+            <th>Produits Achetés</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="facture : ${factures}">
+            <td th:text="${facture.amount}"></td>
+            <td th:text="${facture.client.name}"></td>
+            <td>
+                <ul>
+                    <li th:each="product : ${facture.productPurchased}" th:text="${product.name}"></li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!-- src/main/resources/templates/factureDetails.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture Details</title>
+    <!-- Add your stylesheets or other head elements here -->
+</head>
+<body>
+<div>
+    <h2>Facture Details</h2>
+    <p><strong>ID:</strong> <span th:text="${facture.id}"></span></p>
+    <p><strong>Amount:</strong> <span th:text="${facture.amount}"></span></p>
+    <p><strong>Client:</strong> <span th:text="${facture.client.name}"></span></p>
+    <p><strong>Reglement:</strong> <span th:text="${facture.reglement.method}"></span></p>
+
+    <h3>Products Purchased:</h3>
+    <ul>
+        <li th:each="product : ${facture.productPurchased}">
+            <span th:text="${product.name}"></span> - <span th:text="${product.price}"></span>
+        </li>
+    </ul>
+
+    <p><strong>Created At:</strong> <span th:text="${facture.createdAt}"></span></p>
+    <p><strong>Updated At:</strong> <span th:text="${facture.updatedAt}"></span></p>
+</div>
+<!-- Add your scripts or other body elements here -->
+</body>
+</html>

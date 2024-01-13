@@ -1,0 +1,82 @@
+<!-- src/main/resources/templates/clientDetails.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<div class="container">
+
+    <h2 class="center-align">Client Details</h2>
+
+    <div>
+        <p><strong>Nom:</strong> <span th:text="${client.name}"></span></p>
+        <p><strong>Prénom:</strong> <span th:text="${client.lastname}"></span></p>
+        <!-- Add more details as needed -->
+
+        <!-- Le chiffre d’affaires réalisé avec l’entreprise -->
+        <p><strong>Le chiffre d’affaires réalisé (globalement):</strong> <span th:text="${revenueGlobally}"></span></p>
+        <p><strong>Le chiffre d’affaires réalisé par année:</strong> <span th:text="${revenueByYear}"></span></p>
+
+        <!-- Le reste global des montants non encore payés -->
+        <p><strong>Le reste global des montants non encore payés:</strong> <span th:text="${remainingAmount}"></span></p>
+
+        <!-- Les factures réglées et les factures non encore réglées -->
+        <p><strong>Les factures réglées:</strong></p>
+        <table>
+            <thead>
+            <tr>
+                <th>Facture</th>
+                <th>Montant</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="invoice : ${paidInvoices}">
+                <td th:text="${invoice.invoiceNumber}"></td>
+                <td th:text="${invoice.amount}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Les factures non encore réglées -->
+        <p><strong>Les factures non encore réglées:</strong></p>
+        <table>
+            <thead>
+            <tr>
+                <th>Facture</th>
+                <th>Montant</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="invoice : ${unpaidInvoices}">
+                <td th:text="${invoice.invoiceNumber}"></td>
+                <td th:text="${invoice.amount}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Les produits les plus sollicités -->
+        <table>
+            <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Quantité vendue</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${mostSoldProducts}">
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.quantitySold}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

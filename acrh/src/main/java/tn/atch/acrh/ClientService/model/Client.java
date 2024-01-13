@@ -24,12 +24,9 @@ public class Client {
     private Long id;
     private String name;
     private String lastname;
-    @Column(unique = true)
-    private String email;
-    private String password;
-    @OneToMany
+    @OneToMany(mappedBy = "client", cascade = CascadeType.REMOVE)
     private List<Facture> factures;
-    @OneToMany
+    @OneToMany(mappedBy = "client", cascade = CascadeType.REMOVE)
     private List<Devise> devises;
     @CreationTimestamp
     private LocalDateTime createdAt;

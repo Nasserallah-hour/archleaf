@@ -1,0 +1,38 @@
+<!-- src/main/resources/templates/reglements.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Règlements</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<div class="container">
+
+    <h2 class="center-align">Liste des Règlements</h2>
+    <table class="striped">
+        <thead>
+        <tr>
+            <th>Prix</th>
+            <th>Date de Règlement</th>
+            <th>Règlement Effectué</th>
+            <th>Méthode de Paiement</th>
+            <th>Facture</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="reglement : ${reglements}">
+            <td th:text="${reglement.price}"></td>
+            <td th:text="${reglement.dateReglement}"></td>
+            <td th:text="${reglement.reglementEffectue}"></td>
+            <td th:text="${reglement.paymentMethod}"></td>
+            <td th:text="${reglement.facture.id}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

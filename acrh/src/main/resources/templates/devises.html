@@ -1,0 +1,40 @@
+<!-- src/main/resources/templates/devises.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Devises</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<div class="container">
+
+    <h2 class="center-align">Liste des Devises</h2>
+    <table class="striped">
+        <thead>
+        <tr>
+            <th>Total Amount</th>
+            <th>Is Expired</th>
+            <th>Client</th>
+            <th>Products</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="devise : ${devises}">
+            <td th:text="${devise.totalAmount}"></td>
+            <td th:text="${devise.isExpired}"></td>
+            <td th:text="${devise.client.name}"></td>
+            <td>
+                <ul>
+                    <li th:each="product : ${devise.productToBePurchased}" th:text="${product.name}"></li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

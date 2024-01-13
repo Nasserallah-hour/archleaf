@@ -1,0 +1,36 @@
+<!-- src/main/resources/templates/createClient.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Client</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<div class="container">
+
+    <h2 class="center-align">Create Client</h2>
+
+    <form action="/clients/create" method="post" th:object="${client}">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="name" type="text" th:field="*{name}" required>
+                <label for="name">Name</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="lastname" type="text" th:field="*{lastname}" required>
+                <label for="lastname">Lastname</label>
+            </div>
+        </div>
+
+        <button class="btn waves-effect waves-light" type="submit" name="action">Create Client
+            <i class="material-icons right">send</i>
+        </button>
+    </form>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

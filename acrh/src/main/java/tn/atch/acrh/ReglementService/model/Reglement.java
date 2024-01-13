@@ -32,7 +32,7 @@ public class Reglement {
     @Column(nullable = false)
     private PaymentMethod paymentMethod;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "facture_id")
     private Facture facture;
     @CreationTimestamp
