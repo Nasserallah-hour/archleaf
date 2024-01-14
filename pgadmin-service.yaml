@@ -13,10 +13,7 @@ spec:
   - name: "5050"
     port: 5050
     targetPort: 80
-  - name: httpport # this would open the port for access
-    port: 5050
-    targetPort: 5050
-    nodePort: 30000
+    nodePort: 30000 # this would open the port for access    
 
   selector:
     io.kompose.service: pgadmin
