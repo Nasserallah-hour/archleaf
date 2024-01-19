@@ -48,30 +48,25 @@ public class ProductController {
     public String createProduct(@ModelAttribute Product product) {
         productRepository.save(product);
 
-        // Redirect to the product list page after successful creation
         return "redirect:/products";
     }
 
 
-    // Mapping to display all product categories
     @GetMapping("/categories")
     public String listCategories(Model model) {
         model.addAttribute("categories", productCategoryRepository.findAll());
         return "categories";
     }
 
-    // Mapping to display the category creation form
     @GetMapping("/categories/create")
     public String showCreateCategoryForm(Model model) {
         model.addAttribute("category", new ProductCategory());
         return "createCategory";
     }
 
-    // Mapping to handle the category creation form submission
     @PostMapping("/categories/create")
     public String createCategory(@ModelAttribute ProductCategory category) {
         productCategoryRepository.save(category);
-        // Redirect to the category list page after successful creation
         return "redirect:/categories";
     }
 }

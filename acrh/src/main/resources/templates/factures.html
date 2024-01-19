@@ -1,7 +1,8 @@
 <!-- src/main/resources/templates/factures.html -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" ><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Factures</title>
@@ -9,6 +10,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
+<div layout:fragment="content">
+
 <div class="container">
 
     <h2 class="center-align">Liste des Factures</h2>

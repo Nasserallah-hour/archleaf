@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" ><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créer un Produit</title>
@@ -9,6 +10,8 @@
 
 </head>
 <body>
+<div layout:fragment="content">
+
 <div class="container">
     <h2 class="center-align">Créer un Produit</h2>
 

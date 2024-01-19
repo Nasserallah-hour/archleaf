@@ -48,9 +48,7 @@ public class FactureController {
 
     @PostMapping("buy-products")
     public String buyProducts(@ModelAttribute("buyProductsForm") BuyProductsForm buyProductsForm) throws Exception {
-        // Process the selected products and quantities here
-        // You can use selectedQuantities, selectedProducts, and clientId to perform the necessary actions
-        if(buyProductsForm.getSelectedQuantities().size()!=buyProductsForm.getSelectedQuantities().size()){
+         if(buyProductsForm.getSelectedQuantities().size()!=buyProductsForm.getSelectedQuantities().size()){
             throw new Exception("selections conflict");
         }
         List<Product> products = buyProductsForm.getSelectedQuantities().stream().map(itemId -> productRepository.findById(Long.valueOf(itemId)).orElseThrow()).toList();
@@ -60,11 +58,7 @@ public class FactureController {
         }
         Facture facture = Facture.builder().client(clientRepository.findById(buyProductsForm.getSelectedClient()).orElseThrow()).productPurchased(products).build();
         Long factureId = createFacture(facture).getId();
-//        System.out.println("Buy request received. Client ID: " + clientId);
-//        System.out.println("Selected Products: " + selectedProducts);
-//        System.out.println("Selected Quantities: " + selectedQuantities);
 
-        // Redirect to a success page or any other appropriate action
         return "redirect:/factures/details/" + factureId;    }
 
     public Facture createFacture(Facture facture) {
@@ -75,10 +69,17 @@ public class FactureController {
         return factureRepository.save(facture);
     }
 
-    @GetMapping("/details/{factureId}")
+    @GetMapping("/factures/details/{factureId}")
     public String showFactureDetails(@PathVariable Long factureId, Model model) {
-        Facture facture = factureRepository.findById(factureId).orElseThrow(); // Retrieve Facture from the service
-        model.addAttribute("facture", facture); // Add the facture to the model for Thymeleaf rendering
-        return "factureDetails"; // Return the Thymeleaf template name
+        Facture facture = factureRepository.findById(factureId).orElseThrow();
+        model.addAttribute("facture", facture);
+    return "factureDetails";
+    }
+
+    @GetMapping("/factures")
+    public String allFactures( Model model) {
+        List<Facture> factures = factureRepository.findAll();
+        model.addAttribute("factures", factures);
+        return "factures";
     }
 }

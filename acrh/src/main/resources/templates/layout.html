@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        nav {
+            background-color: #26a69a !important; /* Add !important to ensure it overrides default styles */
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="nav-wrapper">
+        <a href="/" class="brand-logo">E-commerce</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/clients">Clients</a>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/categories">Product Category</a>
+            <li><a href="/factures">Factures</a>
+
+            </li>
+            </li>
+        </ul>
+    </div>
+</nav>
+<section layout:fragment="content">
+</section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    $(document).ready(function(){
+        M.AutoInit();
+    });
+</script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" ><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Catégories de Produits</title>
@@ -9,6 +10,7 @@
 
 </head>
 <body>
+<div layout:fragment="content">
 <div class="container">
     <h2 class="center-align">Liste des Catégories de Produits</h2>
     <a href="/categories/create" class="waves-effect waves-light btn right">Créer une Catégorie</a>

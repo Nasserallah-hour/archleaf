@@ -1,34 +1,33 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Produits</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
+<div layout:fragment="content">
 <div class="container">
+
     <h2 class="center-align">Liste des Produits</h2>
 
     <a href="/products/create" class="waves-effect waves-light btn right">Créer un Produit</a>
 
     <!-- Add a dropdown menu to select the client -->
-    <form id="buyForm" action="/buy-product" method="post" th:object="${buyProductForm}">
+    <form id="buyForm" action="/buy-products" method="post"> <!-- Update the action attribute with your actual endpoint -->
         <div class="input-field">
-            <select th:field="${buyProductForm.selectedClient}">
+            <select>
                 <option value="" disabled selected>Sélectionner un client</option>
                 <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.name + ' ' + client.lastname}"></option>
             </select>
             <label>Client</label>
         </div>
-
-        <input type="hidden" th:field="${buyProductForm.selectedProduct}" />
-
         <div class="center-align">
-            <button type="button" class="waves-effect waves-light btn" onclick="buyProduct()">Acheter</button>
+            <button type="submit" class="waves-effect waves-light btn" id="buyButton">Acheter</button>
         </div>
-
         <table class="striped">
             <thead>
             <tr>
@@ -36,6 +35,7 @@
                 <th>Prix</th>
                 <th>Catégorie</th>
                 <th>Quantité Disponible</th>
+                <th>Quantité Sélectionnée</th>
             </tr>
             </thead>
             <tbody>
@@ -43,10 +43,12 @@
                 <td th:text="${product.name}"></td>
                 <td th:text="${product.price}"></td>
                 <td th:text="${product.category.categoryName}"></td>
+                <td th:text="${product.quantity}"></td>
                 <td>
+                    <!-- Add quantity selector -->
                     <div class="input-field">
-                        <select onchange="updateSelectedProduct(this)">
-                            <option th:value="${product.id}" th:text="${product.quantity}"></option>
+                        <select name="selectedQuantities">
+                            <option th:each="i : ${#numbers.sequence(0, product.quantity)}" th:value="${i}" th:text="${i}"></option>
                         </select>
                         <label>Quantité</label>
                     </div>
@@ -56,22 +58,14 @@
         </table>
     </form>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</div>
 <script>
     $(document).ready(function(){
         M.AutoInit();
     });
-
-    function updateSelectedProduct(select) {
-        // Update the hidden input with the selected product ID
-        $('#buyForm').find('[name="selectedProduct"]').val($(select).val());
-    }
-
-    function buyProduct() {
-        // Submit the form
-        $('#buyForm').submit();
-    }
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 </body>
 </html>

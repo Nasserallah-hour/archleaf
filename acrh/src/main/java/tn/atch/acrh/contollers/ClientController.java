@@ -34,8 +34,8 @@ public class ClientController {
 
     @GetMapping("clients/create")
     public String showCreateClientForm(Model model) {
-        model.addAttribute("client", new Client()); // Provide an empty client object to the form
-        return "createClient"; // Assuming you have a Thymeleaf template for creating a client
+        model.addAttribute("client", new Client());
+        return "createClient";
     }
 
     @PostMapping("clients/create")
