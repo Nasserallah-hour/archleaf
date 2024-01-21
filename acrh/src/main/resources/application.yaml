@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/arch-db
+    url: jdbc:postgresql://project-arch-db:5432/arch-db
     username: arch
     password: +@L6y7
   jpa:

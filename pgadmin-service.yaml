@@ -9,12 +9,10 @@ metadata:
     io.kompose.service: pgadmin
   name: pgadmin
 spec:
-  type: NodePort
   ports:
   - name: "5050"
     port: 5050
     targetPort: 80
-    nodePort: 31000 # this would open the port for access    
   selector:
     io.kompose.service: pgadmin
 status:

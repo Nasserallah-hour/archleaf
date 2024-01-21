@@ -1,7 +1,15 @@
 version: '3'
 services:
+  app:
+    image: projectarch
+    build:
+      dockerfile: dockerfile
+    volumes:
+      - /data/arch-volume
+    ports:
+      - "8080:8080"
   db:
-    container_name: arch-db
+    container_name: project-arch-db
     image: postgres
     restart: always
     environment:

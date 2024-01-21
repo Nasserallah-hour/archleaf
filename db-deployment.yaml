@@ -33,7 +33,7 @@ spec:
           value: arch
         image: postgres
         imagePullPolicy: ""
-        name: arch-db
+        name: project-arch-db
         ports:
         - containerPort: 5432
         resources: {}
